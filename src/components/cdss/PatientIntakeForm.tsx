@@ -41,6 +41,7 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
   const [conditions, setConditions] = useState<Record<string, boolean>>({});
   const [socialHistory, setSocialHistory] = useState<Record<string, boolean>>({});
   const [packYears, setPackYears] = useState('');
+  const [allergies, setAllergies] = useState('');
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
@@ -66,7 +67,7 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
       medicalHistory: {
         conditions: Object.entries(conditions).filter(([, v]) => v).map(([k]) => k),
         medications: [],
-        allergies: [],
+        allergies: socialHistory.allergies ? [allergies] : [],
         surgeries: [],
         familyHistory: [],
         socialHistory: {
@@ -231,14 +232,26 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
           <Label>Social History</Label>
           <div className="space-y-2">
             {socialHistoryOptions.map((option) => (
-              <div key={option.id} className="flex items-center justify-between rounded-lg border p-3">
-                <span className="text-sm text-foreground">{option.label}</span>
-                <Checkbox
-                  checked={socialHistory[option.id] || false}
-                  onCheckedChange={(checked) =>
-                    setSocialHistory((prev) => ({ ...prev, [option.id]: !!checked }))
-                  }
-                />
+              <div key={option.id} >
+                <div className="flex items-center justify-between rounded-lg border p-3">
+                  <span className="text-sm text-foreground">{option.label}</span>
+                  <Checkbox
+                    checked={socialHistory[option.id] || false}
+                    onCheckedChange={(checked) =>
+                      setSocialHistory((prev) => ({ ...prev, [option.id]: !!checked }))
+                    }
+                  />
+                </div>
+                {option.id === 'allergies' && socialHistory.allergies && (
+                  <div className="p-3">
+                    <Textarea
+                      placeholder="Please specify allergies..."
+                      value={allergies}
+                      onChange={(e) => setAllergies(e.target.value)}
+                      rows={2}
+                    />
+                  </div>
+                )}
               </div>
             ))}
             {socialHistory.smoking && (
