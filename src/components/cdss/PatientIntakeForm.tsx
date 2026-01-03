@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Switch } from '@/components/ui/switch';
+import { Checkbox } from '@/components/ui/checkbox';
 import { PatientData } from '@/types/clinical';
 import { FileUploadSection, UploadedFile } from './FileUploadSection';
 import { cn } from '@/lib/utils';
@@ -22,7 +22,14 @@ const commonSymptoms = [
 ];
 
 const commonConditions = [
-  'Diabetes', 'Hypertension', 'Asthma', 'Heart Disease', 'COPD'
+  'Diabetes', 'Hypertension', 'Asthma', 'Heart Disease', 'COPD', 'Kidney Disease', 'Liver Disease', 'Cancer', 'Stroke'
+];
+
+const socialHistoryOptions = [
+  { id: 'smoking', label: 'Smoking' },
+  { id: 'alcohol', label: 'Alcoholic' },
+  { id: 'adhd', label: 'ADHD' },
+  { id: 'allergies', label: 'Allergies' }
 ];
 
 export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProps) {
@@ -32,7 +39,7 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
   const [customSymptom, setCustomSymptom] = useState('');
   const [conditions, setConditions] = useState<Record<string, boolean>>({});
-  const [smoking, setSmoking] = useState(false);
+  const [socialHistory, setSocialHistory] = useState<Record<string, boolean>>({});
   const [packYears, setPackYears] = useState('');
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
@@ -63,7 +70,7 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
         surgeries: [],
         familyHistory: [],
         socialHistory: {
-          smoking: { status: smoking, packYears: smoking ? parseInt(packYears) : undefined },
+          smoking: { status: socialHistory.smoking, packYears: socialHistory.smoking ? parseInt(packYears) : undefined },
         },
       },
       additionalNotes: additionalNotes,
@@ -208,10 +215,10 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
             {commonConditions.map((condition) => (
               <div key={condition} className="flex items-center justify-between rounded-lg border p-3">
                 <span className="text-sm text-foreground">{condition}</span>
-                <Switch
+                <Checkbox
                   checked={conditions[condition] || false}
                   onCheckedChange={(checked) =>
-                    setConditions((prev) => ({ ...prev, [condition]: checked }))
+                    setConditions((prev) => ({ ...prev, [condition]: !!checked }))
                   }
                 />
               </div>
@@ -222,13 +229,20 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
         {/* Social History */}
         <div className="space-y-3">
           <Label>Social History</Label>
-          <div className="space-y-3 rounded-lg border p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-foreground">Smoking</span>
-              <Switch checked={smoking} onCheckedChange={setSmoking} />
-            </div>
-            {smoking && (
-              <div className="flex items-center gap-3">
+          <div className="space-y-2">
+            {socialHistoryOptions.map((option) => (
+              <div key={option.id} className="flex items-center justify-between rounded-lg border p-3">
+                <span className="text-sm text-foreground">{option.label}</span>
+                <Checkbox
+                  checked={socialHistory[option.id] || false}
+                  onCheckedChange={(checked) =>
+                    setSocialHistory((prev) => ({ ...prev, [option.id]: !!checked }))
+                  }
+                />
+              </div>
+            ))}
+            {socialHistory.smoking && (
+              <div className="flex items-center gap-3 p-3">
                 <Input
                   type="number"
                   placeholder="Pack years"
