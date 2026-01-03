@@ -246,14 +246,22 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
         <Button
           onClick={handleSubmit}
           disabled={isLoading || (!age && !chiefComplaint && uploadedFiles.length === 0)}
-          className="w-full gap-2"
+          className={cn(
+            "w-full gap-2 transition-all duration-300",
+            "bg-gradient-to-r from-primary to-indigo-600 hover:from-primary/90 hover:to-indigo-600/90",
+            "shadow-lg hover:shadow-xl hover:scale-[1.02]",
+            isLoading && "animate-pulse cursor-not-allowed opacity-90"
+          )}
           size="lg"
         >
           {isLoading ? (
-            <>Analyzing with AI...</>
+            <div className="flex items-center gap-2">
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              <span>Analyzing with AI...</span>
+            </div>
           ) : (
             <>
-              <Send className="h-4 w-4" />
+              <Send className="h-4 w-4 animate-in slide-in-from-left-1" />
               Analyze Patient Data
             </>
           )}

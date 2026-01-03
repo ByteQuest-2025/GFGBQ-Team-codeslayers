@@ -97,10 +97,24 @@ Analyze the patient data and any attached medical images/documents. Provide your
       "source": "Source name",
       "year": 2024
     }
+  ],
+  "extractedLabResults": [
+    {
+      "name": "Test Name (e.g., Hemoglobin)",
+      "value": 12.5,
+      "unit": "g/dL",
+      "normalRange": { "min": 12, "max": 16 },
+      "status": "normal" | "high" | "low" | "critical"
+    }
   ]
 }
 
-Be thorough, evidence-based, and always prioritize patient safety. If analyzing medical images, describe what you observe and incorporate findings into your differential diagnosis.`;
+Be thorough, evidence-based, and always prioritize patient safety. If analyzing medical images, describe what you observe and incorporate findings into your differential diagnosis.
+
+CRITICAL CLINICAL DISCLAIMERS:
+1. If the diagnosis involves Typhoid/Enteric fever, you MUST explicitly state: "Widal test alone is not diagnostic; interpretation depends on clinical context and endemic baseline titers." in your reasoning or summary.
+2. If Respiratory symptoms (like cough or sputum) are present alongside a diagnosis that typically doesn't present them (like pure Typhoid), you MUST add: "Respiratory symptoms raise possibility of concurrent respiratory infection. Clinical correlation advised."
+3. Ensure the AGE and SEX of the patient are strictly adhered to. Do not hallucinate pediatric age for adult parameters or vice versa. If age/sex are missing/0, clearly state they are unknown.`;
 
     // Construct the parts for the model
     const parts: any[] = [];
@@ -113,15 +127,15 @@ Be thorough, evidence-based, and always prioritize patient safety. If analyzing 
 ${systemPrompt}
 
 PATIENT DATA:
-- Age: ${patientData.age || 'Not specified (Extract from documents if available)'}
-- Sex: ${patientData.sex ? (patientData.sex === 'M' ? 'Male' : patientData.sex === 'F' ? 'Female' : 'Other') : 'Not specified (Extract from documents if available)'}
-- Chief Complaint: ${patientData.chiefComplaint || 'See attached documents'}
-- Symptoms: ${patientData.symptoms.length > 0 ? patientData.symptoms.join(', ') : 'Refer to attached documents'}
-- Medical History: ${patientData.medicalHistory?.conditions?.join(', ') || 'None reported'}
-- Smoking: ${patientData.medicalHistory?.socialHistory?.smoking?.status ? `Yes, ${patientData.medicalHistory.socialHistory.smoking.packYears || 0} pack-years` : 'No'}
+    - Age: ${patientData.age || 'Not specified (Extract from documents if available)'}
+    - Sex: ${patientData.sex ? (patientData.sex === 'M' ? 'Male' : patientData.sex === 'F' ? 'Female' : 'Other') : 'Not specified (Extract from documents if available)'}
+    - Chief Complaint: ${patientData.chiefComplaint || 'See attached documents'}
+    - Symptoms: ${patientData.symptoms.length > 0 ? patientData.symptoms.join(', ') : 'Refer to attached documents'}
+    - Medical History: ${patientData.medicalHistory?.conditions?.join(', ') || 'None reported'}
+    - Smoking: ${patientData.medicalHistory?.socialHistory?.smoking?.status ? `Yes, ${patientData.medicalHistory.socialHistory.smoking.packYears || 0} pack-years` : 'No'}
 ${patientData.additionalNotes ? `- Additional Notes: ${patientData.additionalNotes}` : ''}
 
-INSTRUCTION: If patient demographics (Age, Sex) or symptoms are missing above, prioritize extracting them from the attached content/files to form your analysis.
+    INSTRUCTION: If patient demographics(Age, Sex) or symptoms are missing above, prioritize extracting them from the attached content / files to form your analysis.
 `;
 
     parts.push(patientContext);
@@ -150,7 +164,7 @@ INSTRUCTION: If patient demographics (Age, Sex) or symptoms are missing above, p
           });
           parts.push(`[PDF Document: ${file.name}]`);
         } else if (file.type === 'text' && file.content) {
-          parts.push(`\n--- FROM FILE: ${file.name} ---\n${file.content}\n--- END FILE ---\n`);
+          parts.push(`\n-- - FROM FILE: ${file.name} ---\n${file.content} \n-- - END FILE-- -\n`);
         }
       }
     }
@@ -160,7 +174,7 @@ INSTRUCTION: If patient demographics (Age, Sex) or symptoms are missing above, p
     const text = response.text();
 
     // Clean up markdown if present
-    const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/) || [null, text];
+    const jsonMatch = text.match(/```(?: json) ?\s * ([\s\S] *?)```/) || [null, text];
     const jsonStr = jsonMatch[1] || text;
 
     return JSON.parse(jsonStr.trim()) as DiagnosisResult;
@@ -186,17 +200,17 @@ export const chatWithCDSS = async (
     // We'll create a new chat session but prepend the context
     const contextPrompt = `
 You are a helpful Clinical Decision Support System assistant. 
-You are discussing a specific patient case with a user (doctor or patient).
+You are discussing a specific patient case with a user(doctor or patient).
 
-CONTEXT:
+      CONTEXT:
 Patient Data:
-Age: ${patientData.age}, Sex: ${patientData.sex}, Chief Complaint: ${patientData.chiefComplaint}
-Symptoms: ${patientData.symptoms.join(', ')}
+    Age: ${patientData.age}, Sex: ${patientData.sex}, Chief Complaint: ${patientData.chiefComplaint}
+    Symptoms: ${patientData.symptoms.join(', ')}
 
 Diagnosis Result:
-Urgency: ${diagnosisResult.urgency}
+    Urgency: ${diagnosisResult.urgency}
 Top Diagnosis: ${diagnosisResult.differentialDiagnoses[0]?.name}
-Reasoning: ${diagnosisResult.clinicalReasoning.map(r => r.conclusion).join(' ')}
+    Reasoning: ${diagnosisResult.clinicalReasoning.map(r => r.conclusion).join(' ')}
 
 Please answer the user's questions about this analysis, the diagnosis, or general medical queries related to this case.
 Be helpful, empathetic, but clear that you are an AI assistant.

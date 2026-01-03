@@ -127,9 +127,9 @@ export default function CDSSDashboard() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
-                    {patientData.age} year old {patientData.sex === 'M' ? 'Male' : patientData.sex === 'F' ? 'Female' : 'Patient'}
+                    {patientData.age ? `${patientData.age} year old` : 'Age not provided'} • {patientData.sex === 'M' ? 'Male' : patientData.sex === 'F' ? 'Female' : 'Gender not specified'}
                   </p>
-                  <p className="text-sm text-muted-foreground">{patientData.chiefComplaint}</p>
+                  <p className="text-sm text-muted-foreground">{patientData.chiefComplaint || 'No chief complaint provided'}</p>
                 </div>
               </div>
             )}
@@ -160,7 +160,10 @@ export default function CDSSDashboard() {
                     </div>
                   </div>
 
-                  {demoPatientData.labResults && (
+                  {/* Lab Results */}
+                  {(result.extractedLabResults && result.extractedLabResults.length > 0) ? (
+                    <LabResultsChart results={result.extractedLabResults} />
+                  ) : demoPatientData.labResults && (
                     <LabResultsChart results={demoPatientData.labResults} />
                   )}
 

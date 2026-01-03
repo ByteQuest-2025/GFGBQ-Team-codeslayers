@@ -88,4 +88,5 @@ export interface DiagnosisResult {
   recommendedTests: RecommendedTest[];
   treatmentPathways: TreatmentPathway[];
   references: Reference[];
+  extractedLabResults?: LabResult[];
 }
