@@ -14,8 +14,8 @@ import { SymptomTimeline } from '@/components/cdss/SymptomTimeline';
 import { PatientData, DiagnosisResult, RecommendedTest } from '@/types/clinical';
 import { UploadedFile } from '@/components/cdss/FileUploadSection';
 import { demoPatientData, demoTimelineEvents } from '@/data/demoData';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { analyzeClinicalData } from '@/services/gemini';
 
 type View = 'intake' | 'results';
 
@@ -30,33 +30,24 @@ export default function CDSSDashboard() {
   const handleSubmit = async (data: PatientData, files: UploadedFile[]) => {
     setIsLoading(true);
     setPatientData(data);
-    
+
     try {
-      const { data: response, error } = await supabase.functions.invoke('analyze-clinical', {
-        body: {
-          patientData: data,
-          uploadedFiles: files.map(f => ({
-            name: f.name,
-            type: f.type,
-            data: f.data,
-            content: f.content,
-            extractedText: f.extractedText
-          }))
-        }
+      // Use local Gemini service instead of Supabase Edge Function
+      const response = await analyzeClinicalData({
+        patientData: data,
+        uploadedFiles: files.map(f => ({
+          name: f.name,
+          type: f.type,
+          data: f.data,
+          content: f.content,
+          extractedText: f.extractedText
+        }))
       });
 
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      if (response.error) {
-        throw new Error(response.error);
-      }
-
-      setResult(response as DiagnosisResult);
+      setResult(response);
       setTests(response.recommendedTests || []);
       setView('results');
-      
+
       toast({
         title: "Analysis Complete",
         description: "Clinical decision support analysis has been generated.",
