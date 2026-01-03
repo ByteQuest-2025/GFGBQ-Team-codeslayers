@@ -16,6 +16,7 @@ import { UploadedFile } from '@/components/cdss/FileUploadSection';
 import { demoPatientData, demoTimelineEvents } from '@/data/demoData';
 import { useToast } from '@/hooks/use-toast';
 import { analyzeClinicalData } from '@/services/gemini';
+import DarkModeToggle from '@/components/DarkModeToggle';
 
 type View = 'intake' | 'results';
 
@@ -32,7 +33,6 @@ export default function CDSSDashboard() {
     setPatientData(data);
 
     try {
-      // Use local Gemini service instead of Supabase Edge Function
       const response = await analyzeClinicalData({
         patientData: data,
         uploadedFiles: files.map(f => ({
@@ -49,15 +49,15 @@ export default function CDSSDashboard() {
       setView('results');
 
       toast({
-        title: "Analysis Complete",
-        description: "Clinical decision support analysis has been generated.",
+        title: 'Analysis Complete',
+        description: 'Clinical decision support analysis has been generated.',
       });
     } catch (error) {
       console.error('Analysis error:', error);
       toast({
-        title: "Analysis Failed",
-        description: error instanceof Error ? error.message : "Failed to analyze patient data",
-        variant: "destructive",
+        title: 'Analysis Failed',
+        description: error instanceof Error ? error.message : 'Failed to analyze patient data',
+        variant: 'destructive',
       });
     } finally {
       setIsLoading(false);
@@ -81,7 +81,6 @@ export default function CDSSDashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-3">
@@ -93,12 +92,15 @@ export default function CDSSDashboard() {
               <p className="text-xs text-muted-foreground">AI-Powered Diagnostic Assistance</p>
             </div>
           </div>
-          {view === 'results' && (
-            <Button variant="outline" onClick={handleNewPatient} className="gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              New Patient
-            </Button>
-          )}
+          <div className="flex items-center gap-4">
+            <DarkModeToggle />
+            {view === 'results' && (
+              <Button variant="outline" onClick={handleNewPatient} className="gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                New Patient
+              </Button>
+            )}
+          </div>
         </div>
       </header>
 
@@ -115,10 +117,8 @@ export default function CDSSDashboard() {
           </div>
         ) : result ? (
           <div className="space-y-6">
-            {/* Urgency Banner */}
             <UrgencyBanner level={result.urgency} message={result.urgencyMessage} />
 
-            {/* Patient Summary */}
             {patientData && (
               <div className="flex items-center gap-4 rounded-lg border bg-card p-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
@@ -143,7 +143,6 @@ export default function CDSSDashboard() {
 
               <TabsContent value="diagnosis" className="space-y-6">
                 <div className="grid gap-6 lg:grid-cols-2">
-                  {/* Differential Diagnoses */}
                   <div className="space-y-4 lg:col-span-2">
                     <h3 className="text-lg font-semibold text-foreground">
                       Differential Diagnosis ({result.differentialDiagnoses.length} possibilities)
@@ -159,12 +158,10 @@ export default function CDSSDashboard() {
                     </div>
                   </div>
 
-                  {/* Lab Results */}
                   {demoPatientData.labResults && (
                     <LabResultsChart results={demoPatientData.labResults} />
                   )}
 
-                  {/* Timeline */}
                   <SymptomTimeline events={demoTimelineEvents} />
                 </div>
               </TabsContent>
