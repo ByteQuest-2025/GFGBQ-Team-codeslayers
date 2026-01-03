@@ -161,10 +161,8 @@ export default function CDSSDashboard() {
                   </div>
 
                   {/* Lab Results */}
-                  {(result.extractedLabResults && result.extractedLabResults.length > 0) ? (
+                  {result.extractedLabResults && result.extractedLabResults.length > 0 && (
                     <LabResultsChart results={result.extractedLabResults} />
-                  ) : demoPatientData.labResults && (
-                    <LabResultsChart results={demoPatientData.labResults} />
                   )}
 
                   <SymptomTimeline events={demoTimelineEvents} />
