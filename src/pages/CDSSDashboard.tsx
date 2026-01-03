@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Activity, FileText, ArrowLeft } from 'lucide-react';
+import { Activity, FileText, ArrowLeft, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PatientIntakeForm } from '@/components/cdss/PatientIntakeForm';
@@ -202,6 +202,35 @@ export default function CDSSDashboard() {
           </div>
         ) : null}
       </main>
+
+      <footer className="border-t bg-card/50 py-8 mt-auto">
+        <div className="container flex flex-col items-center justify-center gap-2">
+          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Project Contributors</h3>
+          <div className="flex items-center gap-6">
+            <a
+              href="https://github.com/saurav-shakya"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 px-4 py-2 rounded-full bg-background border shadow-sm hover:border-primary/50 hover:shadow-md transition-all"
+            >
+              <Github className="h-4 w-4 text-foreground group-hover:text-primary transition-colors" />
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Saurav Singh</span>
+            </a>
+            <a
+              href="https://github.com/Ansh-Saraswat-PC"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 px-4 py-2 rounded-full bg-background border shadow-sm hover:border-primary/50 hover:shadow-md transition-all"
+            >
+              <Github className="h-4 w-4 text-foreground group-hover:text-primary transition-colors" />
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Ansh</span>
+            </a>
+          </div>
+          <p className="text-xs text-muted-foreground mt-4">
+            © 2026 Clinical Compass. Built for ByteQuest.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
