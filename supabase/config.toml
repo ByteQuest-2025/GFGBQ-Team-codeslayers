@@ -1,0 +1,4 @@
+project_id = "winqoarixpdxtzinigjw"
+
+[functions.analyze-clinical]
+verify_jwt = false
