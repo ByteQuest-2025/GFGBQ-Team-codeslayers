@@ -8,10 +8,11 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { PatientData } from '@/types/clinical';
+import { FileUploadSection, UploadedFile } from './FileUploadSection';
 import { cn } from '@/lib/utils';
 
 interface PatientIntakeFormProps {
-  onSubmit: (data: PatientData) => void;
+  onSubmit: (data: PatientData, files: UploadedFile[]) => void;
   isLoading?: boolean;
 }
 
@@ -33,6 +34,8 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
   const [conditions, setConditions] = useState<Record<string, boolean>>({});
   const [smoking, setSmoking] = useState(false);
   const [packYears, setPackYears] = useState('');
+  const [additionalNotes, setAdditionalNotes] = useState('');
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
   const toggleSymptom = (symptom: string) => {
     setSelectedSymptoms((prev) =>
@@ -64,7 +67,7 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
         },
       },
     };
-    onSubmit(patientData);
+    onSubmit(patientData, uploadedFiles);
   };
 
   return (
@@ -175,6 +178,28 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
           )}
         </div>
 
+        {/* File Upload Section */}
+        <div className="space-y-3">
+          <Label>Upload Medical Documents</Label>
+          <FileUploadSection
+            files={uploadedFiles}
+            onFilesChange={setUploadedFiles}
+            isProcessing={isLoading}
+          />
+        </div>
+
+        {/* Additional Notes */}
+        <div className="space-y-3">
+          <Label htmlFor="notes">Additional Clinical Notes</Label>
+          <Textarea
+            id="notes"
+            placeholder="Lab results, imaging findings, or any other relevant information..."
+            value={additionalNotes}
+            onChange={(e) => setAdditionalNotes(e.target.value)}
+            rows={3}
+          />
+        </div>
+
         {/* Medical History */}
         <div className="space-y-3">
           <Label>Relevant Medical History</Label>
@@ -224,7 +249,7 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
           size="lg"
         >
           {isLoading ? (
-            <>Analyzing...</>
+            <>Analyzing with AI...</>
           ) : (
             <>
               <Send className="h-4 w-4" />

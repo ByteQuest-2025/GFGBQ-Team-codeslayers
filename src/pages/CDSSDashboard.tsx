@@ -12,7 +12,10 @@ import { ReferencesPanel } from '@/components/cdss/ReferencesPanel';
 import { LabResultsChart } from '@/components/cdss/LabResultsChart';
 import { SymptomTimeline } from '@/components/cdss/SymptomTimeline';
 import { PatientData, DiagnosisResult, RecommendedTest } from '@/types/clinical';
-import { demoDiagnosisResult, demoPatientData, demoTimelineEvents } from '@/data/demoData';
+import { UploadedFile } from '@/components/cdss/FileUploadSection';
+import { demoPatientData, demoTimelineEvents } from '@/data/demoData';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 type View = 'intake' | 'results';
 
@@ -22,19 +25,52 @@ export default function CDSSDashboard() {
   const [patientData, setPatientData] = useState<PatientData | null>(null);
   const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [tests, setTests] = useState<RecommendedTest[]>([]);
+  const { toast } = useToast();
 
-  const handleSubmit = async (data: PatientData) => {
+  const handleSubmit = async (data: PatientData, files: UploadedFile[]) => {
     setIsLoading(true);
     setPatientData(data);
     
-    // Simulate AI processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    
-    // In production, this would call your AI backend
-    setResult(demoDiagnosisResult);
-    setTests(demoDiagnosisResult.recommendedTests);
-    setView('results');
-    setIsLoading(false);
+    try {
+      const { data: response, error } = await supabase.functions.invoke('analyze-clinical', {
+        body: {
+          patientData: data,
+          uploadedFiles: files.map(f => ({
+            name: f.name,
+            type: f.type,
+            data: f.data,
+            content: f.content,
+            extractedText: f.extractedText
+          }))
+        }
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (response.error) {
+        throw new Error(response.error);
+      }
+
+      setResult(response as DiagnosisResult);
+      setTests(response.recommendedTests || []);
+      setView('results');
+      
+      toast({
+        title: "Analysis Complete",
+        description: "Clinical decision support analysis has been generated.",
+      });
+    } catch (error) {
+      console.error('Analysis error:', error);
+      toast({
+        title: "Analysis Failed",
+        description: error instanceof Error ? error.message : "Failed to analyze patient data",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleToggleTest = (testName: string) => {
@@ -146,7 +182,7 @@ export default function CDSSDashboard() {
                 <div className="grid gap-6 lg:grid-cols-2">
                   <ClinicalReasoningPanel
                     reasoning={result.clinicalReasoning}
-                    conclusion="Primary: Community-Acquired Pneumonia. Must rule out: Acute Coronary Syndrome"
+                    conclusion={`Primary diagnosis based on clinical findings and AI analysis.`}
                   />
                   <ReferencesPanel references={result.references} />
                 </div>
