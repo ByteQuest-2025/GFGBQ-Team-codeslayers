@@ -63,6 +63,10 @@ Follow these steps to set up the project locally:
 
 ## 👥 Contributors
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6a35ad7a7b0fecc67777ec7db9ff6a2a20b75226
 | Name | GitHub Profile |
 |------|----------------|
 | **Saurav Singh** | [View Profile](https://github.com/saurav-shakya) |
