@@ -1,52 +1,75 @@
-# Welcome to your cdss project
+# Clinical Compass - Intelligent Clinical Decision Support System (CDSS)
 
-## Project info
+Clinical Compass is a state-of-the-art Clinical Decision Support System designed to assist medical professionals in making data-driven diagnoses. By leveraging advanced AI and real-time patient data analysis, it provides accurate clinical insights, treatment recommendations, and interactive visualizations.
 
+## 🚀 Features
 
+- **🤖 AI-Powered Clinical Analysis**  
+  Utilizes the Gemini 2.5 Flash model (via Google Generative AI) to analyze patient symptoms, vitals, and history, offering potential diagnoses and treatment plans.
 
+- **💬 Interactive Chat Assistant**  
+  A premium, doctor-friendly chat interface that allows medical professionals to:
+  - Ask follow-up questions about diagnoses.
+  - View "Vital Trends" with interactive graphs.
+  - Access relevant clinical guidelines and citations in a dedicated sidebar.
+  - Export consultation records as PDF/documents.
 
+- **📊 Dynamic Data Visualization**  
+  Real-time graphical representation of patient vitals (Heart Rate, Temperature, etc.) to easily track trends over time.
 
+- **📝 Comprehensive Patient Intake**  
+  Streamlined forms for capturing essential patient demographics, symptoms, and medical history.
 
+- **🛡️ Secure & Scalable**  
+  Built with modern reliability and best practices for clinical software.
 
-Follow these steps:
+## 🛠️ Technology Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Frontend Core**: [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
+- **AI Engine**: Google Gemini API
+- **Icons**: Lucide React
+- **Charts**: Recharts
+- **Markdown Rendering**: react-markdown & remark-gfm
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 📦 Installation & Setup
 
-# Step 3: Install the necessary dependencies.
-npm i
+Follow these steps to set up the project locally:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ByteQuest-2025/GFGBQ-Team-codeslayers/
+   cd clinical-compass
+   ```
 
-**Edit a file directly in GitHub**
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. **Configure Environment Variables**
+   Create a `.env` file in the root directory and add your API keys:
+   ```env
+   VITE_GEMINI_API_KEY=your_gemini_api_key
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-**Use GitHub Codespaces**
+4. **Run Development Server**
+   ```bash
+   npm run dev
+   ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 👥 Contributors
 
-## What technologies are used for this project
+A huge thanks to the team making this possible:
 
-This project is built with:
+| Name | GitHub Profile |
+|------|----------------|
+| **Saurav Singh** | [View Profile](https://github.com/saurav-shakya) |
+| **Ansh** | [View Profile](https://github.com/Ansh-Saraswat-PC) |
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📄 License
 
-
-
+This project is intended for educational and clinical decision support research purposes. Always verify AI suggestions with qualified medical professionals.
