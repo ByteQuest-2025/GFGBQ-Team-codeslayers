@@ -11,6 +11,7 @@ import { TreatmentPathwayPanel } from '@/components/cdss/TreatmentPathwayPanel';
 import { ReferencesPanel } from '@/components/cdss/ReferencesPanel';
 import { LabResultsChart } from '@/components/cdss/LabResultsChart';
 import { SymptomTimeline } from '@/components/cdss/SymptomTimeline';
+import { ChatInterface } from '@/components/cdss/ChatInterface';
 import { PatientData, DiagnosisResult, RecommendedTest } from '@/types/clinical';
 import { UploadedFile } from '@/components/cdss/FileUploadSection';
 import { demoPatientData, demoTimelineEvents } from '@/data/demoData';
@@ -134,11 +135,12 @@ export default function CDSSDashboard() {
             )}
 
             <Tabs defaultValue="diagnosis" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="diagnosis">Diagnosis</TabsTrigger>
                 <TabsTrigger value="reasoning">Reasoning</TabsTrigger>
                 <TabsTrigger value="tests">Tests</TabsTrigger>
                 <TabsTrigger value="treatment">Treatment</TabsTrigger>
+                <TabsTrigger value="chat">AI Assistant</TabsTrigger>
               </TabsList>
 
               <TabsContent value="diagnosis" className="space-y-6">
@@ -190,6 +192,12 @@ export default function CDSSDashboard() {
                   {result.treatmentPathways.map((pathway, idx) => (
                     <TreatmentPathwayPanel key={idx} pathways={[pathway]} />
                   ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="chat">
+                <div className="mx-auto max-w-4xl">
+                  {patientData && <ChatInterface patientData={patientData} diagnosisResult={result} />}
                 </div>
               </TabsContent>
             </Tabs>

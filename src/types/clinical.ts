@@ -8,6 +8,7 @@ export interface PatientData {
   medicalHistory: MedicalHistory;
   labResults?: LabResult[];
   vitalSigns?: VitalSigns;
+  additionalNotes?: string;
 }
 
 export interface MedicalHistory {

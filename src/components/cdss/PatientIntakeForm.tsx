@@ -66,6 +66,7 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
           smoking: { status: smoking, packYears: smoking ? parseInt(packYears) : undefined },
         },
       },
+      additionalNotes: additionalNotes,
     };
     onSubmit(patientData, uploadedFiles);
   };
@@ -244,7 +245,7 @@ export function PatientIntakeForm({ onSubmit, isLoading }: PatientIntakeFormProp
         {/* Submit */}
         <Button
           onClick={handleSubmit}
-          disabled={isLoading || !age || !chiefComplaint}
+          disabled={isLoading || (!age && !chiefComplaint && uploadedFiles.length === 0)}
           className="w-full gap-2"
           size="lg"
         >
