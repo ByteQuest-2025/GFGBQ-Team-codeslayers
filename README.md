@@ -1,6 +1,22 @@
-# Clinical Compass - Intelligent Clinical Decision Support System (CDSS)
+# Clinical Compass - Intelligent Clinical Decision Support System (CDSS) [Problem Statement P-04]
 
 Clinical Compass is a state-of-the-art Clinical Decision Support System designed to assist medical professionals in making data-driven diagnoses. By leveraging advanced AI and real-time patient data analysis, it provides accurate clinical insights, treatment recommendations, and interactive visualizations.
+
+# Team Name
+
+Codeslayers
+
+## Deployed Link
+
+https://cdss-theta.vercel.app/
+
+## Demonstration Video Link
+
+[TBD]
+
+## Presentation Link
+
+[TBD]
 
 ## 🚀 Features
 
