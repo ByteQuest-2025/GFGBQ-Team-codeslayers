@@ -118,15 +118,18 @@ Explore the different panels on the dashboard to view Recommended Tests, the AI'
 
 # Screenshots 
 
-![images](images/Screenshot 2026-01-04 104928.png)
-![images](images/Screenshot 2026-01-04 104942.png)
-![images](images/Screenshot 2026-01-04 104952.png)
-![images](images/Screenshot 2026-01-04 105033.png)
-![images](images/Screenshot 2026-01-04 105335.png)
-![images](images/Screenshot 2026-01-04 105425.png)
-![images](images/Screenshot 2026-01-04 105441.png)
-![images](images/Screenshot 2026-01-04 105459.png)
-![images](images/Screenshot 2026-01-04 105513.png)
+<img width="1361" height="634" alt="Screenshot 2026-01-04 105513" src="https://github.com/user-attachments/assets/a908eab5-0183-4303-995d-a9b24257ab07" />
+<img width="1365" height="639" alt="Screenshot 2026-01-04 105459" src="https://github.com/user-attachments/assets/4bc9b282-f86b-4956-86a0-93ba69a06a16" />
+<img width="1365" height="641" alt="Screenshot 2026-01-04 105441" src="https://github.com/user-attachments/assets/3c44b85f-8534-44c0-844d-98add56f726d" />
+<img width="1364" height="630" alt="Screenshot 2026-01-04 105425" src="https://github.com/user-attachments/assets/acd3d22f-c5fa-4972-a051-566fd7288a08" />
+<img width="1362" height="635" alt="Screenshot 2026-01-04 105335" src="https://github.com/user-attachments/assets/24dfc896-b459-4045-929c-c2e98fcc9ef8" />
+<img width="1326" height="621" alt="Screenshot 2026-01-04 105033" src="https://github.com/user-attachments/assets/aaaf474c-0085-417e-abf1-56b5b806bc01" />
+<img width="1326" height="621" alt="Screenshot 2026-01-04 105033" src="https://github.com/user-attachments/assets/dc2187fa-36f0-4a52-93aa-3a4f13caffb6" />
+<img width="1329" height="619" alt="Screenshot 2026-01-04 104952" src="https://github.com/user-attachments/assets/7090495e-085e-46b4-83fb-4856b8bd639d" />
+<img width="1329" height="620" alt="Screenshot 2026-01-04 104942" src="https://github.com/user-attachments/assets/e1fdafda-6640-4ae5-b659-dc7f252e10fd" />
+<img width="1329" height="613" alt="Screenshot 2026-01-04 104928" src="https://github.com/user-attachments/assets/cb27efe8-f2c0-449d-9737-49db3d5780b0" />
+<img width="613" height="483" alt="Screenshot 2026-01-03 185950" src="https://github.com/user-attachments/assets/7c7c9bab-a214-4bd7-8894-cbedb339fc2e" />
+
 
 ## 👥 Contributors
 
