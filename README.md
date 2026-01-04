@@ -6,7 +6,7 @@ reported symptoms, and laboratory results. The system leverages machine
 learning techniques to identify relevant disease patterns, support differential
 diagnosis, and highlight potential health conditions.
 
-# Clinical Compass - Intelligent Clinical Decision Support System (CDSS) [Problem Name]
+# Clinical Compass - Intelligent Clinical Decision Support System (CDSS) [Project Name]
 
 Clinical Compass is a state-of-the-art Clinical Decision Support System designed to assist medical professionals in making data-driven diagnoses. By leveraging advanced AI and real-time patient data analysis, it provides accurate clinical insights, treatment recommendations, and interactive visualizations.
 
