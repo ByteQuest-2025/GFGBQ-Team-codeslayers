@@ -6,9 +6,9 @@ reported symptoms, and laboratory results. The system leverages machine
 learning techniques to identify relevant disease patterns, support differential
 diagnosis, and highlight potential health conditions.
 
-# Clinical Compass - Intelligent Clinical Decision Support System (CDSS) [Project Name]
+# Project Name
 
-Clinical Compass is a state-of-the-art Clinical Decision Support System designed to assist medical professionals in making data-driven diagnoses. By leveraging advanced AI and real-time patient data analysis, it provides accurate clinical insights, treatment recommendations, and interactive visualizations.
+Clinical Compass
 
 # Team Name
 
@@ -25,6 +25,10 @@ https://cdss-theta.vercel.app/
 ## Presentation Link
 
 [TBD]
+
+# Project Overview
+
+Clinical Compass is a state-of-the-art Clinical Decision Support System designed to assist medical professionals in making data-driven diagnoses. By leveraging advanced AI and real-time patient data analysis, it provides accurate clinical insights, treatment recommendations, and interactive visualizations.
 
 ## 🚀 Features
 
@@ -57,7 +61,7 @@ https://cdss-theta.vercel.app/
 - **Charts**: Recharts
 - **Markdown Rendering**: react-markdown & remark-gfm
 
-## 📦 Installation & Setup
+# 📦 Installation & Setup
 
 Follow these steps to set up the project locally:
 
@@ -84,6 +88,37 @@ Follow these steps to set up the project locally:
    ```bash
    npm run dev
    ```
+
+# Usage Instructions
+
+1. **Start the Application**: 
+Once the development server is running, open your web browser and navigate to http://localhost:5173 (or the port specified in your console).
+
+2. **Patient Data Entry**:
+
+Begin by filling out the Patient Intake Form.
+Enter the patient's demographics, presenting symptoms, medical history, and latest vital signs.
+
+3. **AI-Powered Analysis**:
+
+After submitting the form, the AI assistant will process the information to generate a preliminary analysis.
+The main dashboard will update to display potential diagnoses, graphical trends of vital signs, and a recommended treatment pathway.
+
+4. **Interactive Chat**:
+
+Use the chat interface to ask follow-up questions and gain deeper insights. For example, you can ask:
+"Explain the treatment plan rationale"
+"What are the alternative diagnoses?"
+"Show related clinical guidelines"
+"Risk factors analysis"
+
+5. **Review Detailed Panels**:
+
+Explore the different panels on the dashboard to view Recommended Tests, the AI's Clinical Reasoning, and a list of References or citations that support the conclusions.
+
+# Screenshots 
+
+[TBD]
 
 ## 👥 Contributors
 
