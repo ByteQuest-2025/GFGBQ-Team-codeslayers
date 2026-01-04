@@ -8,11 +8,11 @@ diagnosis, and highlight potential health conditions.
 
 # Project Name
 
-Clinical Compass
+**Clinical Compass**
 
 # Team Name
 
-Codeslayers
+**Codeslayers**
 
 ## Deployed Link
 
@@ -20,11 +20,11 @@ https://cdss-theta.vercel.app/
 
 ## Demonstration Video Link
 
-[TBD]
+[https://drive.google.com/file/d/1Dn2qJ0n9_bnp2soqzdsXmQhH6S1Wu-br/view?usp=sharing]
 
 ## Presentation Link
 
-[TBD]
+[https://docs.google.com/presentation/d/1LJyb6tKDIkoUxl77by_l7OYrnCaaI-qa/edit?usp=sharing&ouid=105275889791132121591&rtpof=true&sd=true]
 
 # Project Overview
 
@@ -118,7 +118,15 @@ Explore the different panels on the dashboard to view Recommended Tests, the AI'
 
 # Screenshots 
 
-[TBD]
+![images](images/Screenshot 2026-01-04 104928.png)
+![images](images/Screenshot 2026-01-04 104942.png)
+![images](images/Screenshot 2026-01-04 104952.png)
+![images](images/Screenshot 2026-01-04 105033.png)
+![images](images/Screenshot 2026-01-04 105335.png)
+![images](images/Screenshot 2026-01-04 105425.png)
+![images](images/Screenshot 2026-01-04 105441.png)
+![images](images/Screenshot 2026-01-04 105459.png)
+![images](images/Screenshot 2026-01-04 105513.png)
 
 ## 👥 Contributors
 
