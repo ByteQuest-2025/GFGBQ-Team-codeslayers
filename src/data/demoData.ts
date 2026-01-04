@@ -66,6 +66,7 @@ export const demoDiagnosisResult: DiagnosisResult = {
       confidence: 85,
       priority: 'high',
       icd10Code: 'J18.9',
+      evidence: 'The combination of high fever, productive cough, and elevated inflammatory markers (WBC, CRP) strongly suggests a bacterial lower respiratory tract infection. Chest X-ray findings would be confirmatory.',
       keyIndicators: [
         { indicator: 'Fever >3 days (38.9°C)', present: true },
         { indicator: 'Productive cough', present: true },
@@ -83,6 +84,7 @@ export const demoDiagnosisResult: DiagnosisResult = {
       confidence: 60,
       priority: 'moderate',
       icd10Code: 'J20.9',
+      evidence: 'While cough is present, the high inflammatory markers and severity of symptoms make simple bronchitis less likely. This is typically a diagnosis of exclusion.',
       keyIndicators: [
         { indicator: 'Cough pattern consistent', present: true },
         { indicator: 'No focal consolidation', present: false },
@@ -98,6 +100,7 @@ export const demoDiagnosisResult: DiagnosisResult = {
       confidence: 35,
       priority: 'high',
       icd10Code: 'I21.9',
+      evidence: 'The presence of chest pain combined with significant risk factors (male, age 45+, 20-pack-year smoker) makes it critical to rule out ACS, even if an infectious process is also present.',
       keyIndicators: [
         { indicator: 'Chest pain present', present: true, critical: true },
         { indicator: 'Smoking history (20 pack-years)', present: true, critical: true },

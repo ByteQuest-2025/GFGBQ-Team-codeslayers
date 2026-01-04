@@ -8,7 +8,7 @@ import { Diagnosis, UrgencyLevel } from '@/types/clinical';
 interface DiagnosisCardProps {
   diagnosis: Diagnosis;
   rank: number;
-  onViewEvidence?: () => void;
+  onViewEvidence?: (evidence: string) => void;
 }
 
 const priorityStyles: Record<UrgencyLevel, { badge: string; bar: string }> = {
@@ -32,6 +32,12 @@ const priorityStyles: Record<UrgencyLevel, { badge: string; bar: string }> = {
 
 export function DiagnosisCard({ diagnosis, rank, onViewEvidence }: DiagnosisCardProps) {
   const styles = priorityStyles[diagnosis.priority];
+
+  const handleEvidenceClick = () => {
+    if (onViewEvidence) {
+      onViewEvidence(diagnosis.evidence);
+    }
+  };
 
   return (
     <Card className="overflow-hidden border-l-4 transition-shadow hover:shadow-md" style={{ borderLeftColor: `hsl(var(--urgency-${diagnosis.priority}))` }}>
@@ -108,7 +114,7 @@ export function DiagnosisCard({ diagnosis, rank, onViewEvidence }: DiagnosisCard
           <Button
             variant="outline"
             size="sm"
-            onClick={onViewEvidence}
+            onClick={handleEvidenceClick}
             className="gap-1"
           >
             View Evidence
