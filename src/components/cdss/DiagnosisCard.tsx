@@ -1,14 +1,12 @@
-import { ChevronRight, Check, AlertTriangle, X } from 'lucide-react';
+import { Check, AlertTriangle, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Diagnosis, UrgencyLevel } from '@/types/clinical';
 
 interface DiagnosisCardProps {
   diagnosis: Diagnosis;
   rank: number;
-  onViewEvidence?: (evidence: string) => void;
 }
 
 const priorityStyles: Record<UrgencyLevel, { badge: string; bar: string }> = {
@@ -30,14 +28,8 @@ const priorityStyles: Record<UrgencyLevel, { badge: string; bar: string }> = {
   },
 };
 
-export function DiagnosisCard({ diagnosis, rank, onViewEvidence }: DiagnosisCardProps) {
+export function DiagnosisCard({ diagnosis, rank }: DiagnosisCardProps) {
   const styles = priorityStyles[diagnosis.priority];
-
-  const handleEvidenceClick = () => {
-    if (onViewEvidence) {
-      onViewEvidence(diagnosis.evidence);
-    }
-  };
 
   return (
     <Card className="overflow-hidden border-l-4 transition-shadow hover:shadow-md" style={{ borderLeftColor: `hsl(var(--urgency-${diagnosis.priority}))` }}>
@@ -107,19 +99,6 @@ export function DiagnosisCard({ diagnosis, rank, onViewEvidence }: DiagnosisCard
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Actions */}
-        <div className="flex items-center gap-2 pt-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleEvidenceClick}
-            className="gap-1"
-          >
-            View Evidence
-            <ChevronRight className="h-3.5 w-3.5" />
-          </Button>
         </div>
       </CardContent>
     </Card>

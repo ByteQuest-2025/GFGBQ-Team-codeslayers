@@ -18,7 +18,6 @@ import { demoPatientData, demoTimelineEvents } from '@/data/demoData';
 import { useToast } from '@/hooks/use-toast';
 import { analyzeClinicalData } from '@/services/gemini';
 import DarkModeToggle from '@/components/DarkModeToggle';
-import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction } from '@/components/ui/alert-dialog';
 
 type View = 'intake' | 'results';
 
@@ -29,7 +28,6 @@ export default function CDSSDashboard() {
   const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [tests, setTests] = useState<RecommendedTest[]>([]);
   const { toast } = useToast();
-  const [evidence, setEvidence] = useState<string | null>(null);
 
   const handleSubmit = async (data: PatientData, files: UploadedFile[]) => {
     setIsLoading(true);
@@ -157,7 +155,6 @@ export default function CDSSDashboard() {
                           key={idx}
                           diagnosis={diagnosis}
                           rank={idx + 1}
-                          onViewEvidence={setEvidence}
                         />
                       ))}
                     </div>
@@ -234,22 +231,6 @@ export default function CDSSDashboard() {
           </p>
         </div>
       </footer>
-
-      {evidence && (
-        <AlertDialog open onOpenChange={() => setEvidence(null)}>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Supporting Evidence</AlertDialogTitle>
-              <AlertDialogDescription>
-                {evidence}
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogAction onClick={() => setEvidence(null)}>Close</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      )}
     </div>
   );
 }

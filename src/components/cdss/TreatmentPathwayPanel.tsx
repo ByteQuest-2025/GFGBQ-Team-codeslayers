@@ -8,6 +8,18 @@ interface TreatmentPathwayPanelProps {
 }
 
 export function TreatmentPathwayPanel({ pathways }: TreatmentPathwayPanelProps) {
+  const handleViewGuidelines = () => {
+    // In a real app, this would link to clinical guidelines, e.g., UpToDate, or a specific URL.
+    console.log('Triggered action to view full clinical guidelines.');
+    window.open('https://www.uptodate.com/contents/search', '_blank', 'noopener,noreferrer');
+  };
+
+  const handleExportPlan = () => {
+    // This would trigger a download or API call to generate a document (PDF, etc.)
+    console.log('Exporting treatment plan...');
+    alert('Export functionality is a placeholder. It would typically generate a PDF or other document format.');
+  };
+
   return (
     <Card>
       <CardHeader className="border-b">
@@ -59,11 +71,11 @@ export function TreatmentPathwayPanel({ pathways }: TreatmentPathwayPanelProps) 
         ))}
 
         <div className="flex gap-2 border-t pt-4">
-          <Button variant="outline" className="flex-1 gap-2">
+          <Button variant="outline" className="flex-1 gap-2" onClick={handleViewGuidelines}>
             <FileText className="h-4 w-4" />
             View Full Guidelines
           </Button>
-          <Button variant="outline" className="gap-2">
+          <Button variant="outline" className="gap-2" onClick={handleExportPlan}>
             Export Plan
             <ChevronRight className="h-4 w-4" />
           </Button>

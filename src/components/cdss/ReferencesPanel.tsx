@@ -8,6 +8,10 @@ interface ReferencesPanelProps {
 }
 
 export function ReferencesPanel({ references }: ReferencesPanelProps) {
+  const handleReferenceClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <Card>
       <CardHeader className="border-b">
@@ -36,7 +40,12 @@ export function ReferencesPanel({ references }: ReferencesPanelProps) {
                 </div>
               </div>
               {ref.url && (
-                <Button variant="ghost" size="sm" className="shrink-0 gap-1">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="shrink-0 gap-1"
+                  onClick={() => handleReferenceClick(ref.url!)}
+                >
                   View
                   <ExternalLink className="h-3 w-3" />
                 </Button>
